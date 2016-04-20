@@ -20,14 +20,15 @@
 
 """
 
-from security_monkey.watcher import Watcher
-from security_monkey.watcher import ChangeItem
+import json
+
+from boto.vpc import regions
+
+from security_monkey.scheduler.watcher import Watcher
+from security_monkey.scheduler.watcher import ChangeItem
 from security_monkey.constants import TROUBLE_REGIONS
 from security_monkey.exceptions import BotoConnectionIssue
 from security_monkey import app
-
-from boto.vpc import regions
-import json
 
 
 def deep_dict(obj):

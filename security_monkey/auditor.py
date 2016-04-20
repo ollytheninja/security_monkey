@@ -21,15 +21,14 @@
 
 """
 
-import datastore
+from sqlalchemy import and_
 
+import datastore
 from security_monkey import app, db
-from security_monkey.watcher import ChangeItem
+from security_monkey.scheduler.watcher import ChangeItem
 from security_monkey.common.jinja import get_jinja_env
 from security_monkey.datastore import User, AuditorSettings, Item, ItemAudit, Technology, Account
-from security_monkey.common.utils import send_email
-
-from sqlalchemy import and_
+from security_monkey.common import utils
 
 
 class Auditor(object):
@@ -192,7 +191,7 @@ class Auditor(object):
             return
 
         subject = "Security Monkey {} Auditor Report".format(self.i_am_singular)
-        send_email(subject=subject, recipients=self.emails, html=report)
+        utils.send_email(subject=subject, recipients=self.emails, html=report)
 
     def create_report(self):
         """

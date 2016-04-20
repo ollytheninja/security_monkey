@@ -99,8 +99,8 @@ security = Security(app, user_datastore)
 ### Flask Mail ###
 from flask_mail import Mail
 mail = Mail(app=app)
-from security_monkey.common.utils import send_email as common_send_email
 
+from common import utils
 
 @security.send_mail_task
 def send_email(msg):
@@ -108,7 +108,7 @@ def send_email(msg):
     Overrides the Flask-Security/Flask-Mail integration
     to send emails out via boto and ses.
     """
-    common_send_email(subject=msg.subject, recipients=msg.recipients, html=msg.html)
+    utils.send_email(subject=msg.subject, recipients=msg.recipients, html=msg.html)
 
 
 ### FLASK API ###

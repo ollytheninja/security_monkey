@@ -58,6 +58,10 @@ class Account(db.Model):
     issue_categories = relationship("AuditorSettings", backref="account")
     role_name = Column(String(256))
 
+    sched_interval = Column(Integer(), default=15)
+    sched_last_run = Column(DateTime(timezone=True), default=datetime.datetime.min)
+
+
 class Technology(db.Model):
     """
     meant to model AWS primatives (elb, s3, iamuser, iamgroup, etc.)

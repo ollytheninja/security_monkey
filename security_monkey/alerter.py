@@ -23,7 +23,7 @@
 from security_monkey import app
 from security_monkey.common.jinja import get_jinja_env
 from security_monkey.datastore import User
-from security_monkey.common.utils import send_email
+from security_monkey.common import utils
 
 
 def get_subject(has_issues, has_new_issue, has_unjustified_issue, account, watcher_str):
@@ -93,4 +93,4 @@ class Alerter(object):
         content = {u'watchers': changed_watchers}
         body = report_content(content)
         subject = get_subject(has_issues, has_new_issue, has_unjustified_issue, self.account, watcher_str)
-        return send_email(subject=subject, recipients=self.emails, html=body)
+        return utils.send_email(subject=subject, recipients=self.emails, html=body)

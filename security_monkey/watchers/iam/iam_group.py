@@ -20,14 +20,14 @@
 
 """
 
-from security_monkey.watcher import Watcher
-from security_monkey.watcher import ChangeItem
+import json
+import urllib
+
+from security_monkey.scheduler.watcher import Watcher
+from security_monkey.scheduler.watcher import ChangeItem
 from security_monkey.exceptions import InvalidAWSJSON
 from security_monkey.exceptions import BotoConnectionIssue
 from security_monkey import app
-
-import json
-import urllib
 
 
 def all_managed_policies(conn):

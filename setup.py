@@ -21,7 +21,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'APScheduler==2.1.2',
+        'APScheduler==3.0',
         'BeautifulSoup==3.2.1',
         'Flask==0.10.1',
         'Flask-Login==0.2.10',

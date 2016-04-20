@@ -19,14 +19,14 @@
 .. moduleauthor:: Patrick Kelley <pkelley@netflix.com> @monkeysecurity
 
 """
-from security_monkey.watcher import Watcher
-from security_monkey.watcher import ChangeItem
+from cryptography import x509
+from cryptography.hazmat.backends import default_backend
+
+from security_monkey.scheduler.watcher import Watcher
+from security_monkey.scheduler.watcher import ChangeItem
 from security_monkey.constants import TROUBLE_REGIONS
 from security_monkey.exceptions import BotoConnectionIssue
 from security_monkey import app
-
-from cryptography import x509
-from cryptography.hazmat.backends import default_backend
 
 
 def cert_get_signing_algorithm(cert):

@@ -9,21 +9,20 @@
 
 """
 from botocore.exceptions import ClientError
+import time
+from copy import deepcopy
 
-from common.PolicyDiff import PolicyDiff
-from common.utils import sub_dict
+import dpath.util
+from boto.exception import BotoServerError
+from dpath.exceptions import PathNotFound
+
+import security_monkey.datastore
 from security_monkey import app
+from security_monkey.common import utils
+from security_monkey.common.PolicyDiff import PolicyDiff
+from security_monkey.common.jinja import get_jinja_env
 from security_monkey.datastore import Account
 from security_monkey.datastore import IgnoreListEntry, Technology
-from security_monkey.common.jinja import get_jinja_env
-
-from boto.exception import BotoServerError
-import time
-
-import datastore
-from copy import deepcopy
-import dpath.util
-from dpath.exceptions import PathNotFound
 
 
 class Watcher(object):
@@ -38,7 +37,7 @@ class Watcher(object):
 
     def __init__(self, accounts=None, debug=False):
         """Initializes the Watcher"""
-        self.datastore = datastore.Datastore()
+        self.datastore = security_monkey.datastore.Datastore()
         if not accounts:
             accounts = Account.query.filter(Account.third_party==False).filter(Account.active==True).all()
             self.accounts = [account.name for account in accounts]
@@ -248,7 +247,7 @@ class Watcher(object):
             eph_change_item = None
             dur_change_item = None
 
-            if not sub_dict(prev_item.config) == sub_dict(curr_item.config):
+            if not utils.sub_dict(prev_item.config) == utils.sub_dict(curr_item.config):
                 eph_change_item = ChangeItem.from_items(old_item=prev_item, new_item=curr_item)
 
             if self.ephemerals_skipped():
@@ -264,7 +263,7 @@ class Watcher(object):
                             pass
 
                 # now, compare only non-ephemeral paths
-                if not sub_dict(dur_prev_item.config) == sub_dict(dur_curr_item.config):
+                if not utils.sub_dict(dur_prev_item.config) == utils.sub_dict(dur_curr_item.config):
                     dur_change_item = ChangeItem.from_items(old_item=dur_prev_item, new_item=dur_curr_item)
 
                 # store all changes, divided in specific categories

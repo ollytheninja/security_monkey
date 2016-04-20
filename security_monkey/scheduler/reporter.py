@@ -22,11 +22,11 @@
 
 """
 
+import time
+
+from security_monkey import app, db
 from security_monkey.alerter import Alerter
 from security_monkey.monitors import all_monitors
-from security_monkey import app, db
-
-import time
 
 
 class Reporter(object):

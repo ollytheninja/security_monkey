@@ -21,6 +21,8 @@ SQLALCHEMY_DATABASE_URI = 'postgresql://securitymonkeyuser:securitymonkeypass@lo
 
 SQLALCHEMY_POOL_SIZE = 50
 SQLALCHEMY_MAX_OVERFLOW = 15
+SQLALCHEMY_POOL_RECYCLE = 900
+
 ENVIRONMENT = 'local'
 USE_ROUTE53 = False
 FQDN = '127.0.0.1'

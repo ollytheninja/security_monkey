@@ -20,16 +20,17 @@
 
 """
 
-from security_monkey.watcher import Watcher
-from security_monkey.watcher import ChangeItem
+import json
+
+from boto.s3.connection import OrdinaryCallingFormat
+import boto
+
+from security_monkey.scheduler.watcher import Watcher
+from security_monkey.scheduler.watcher import ChangeItem
 from security_monkey.exceptions import BotoConnectionIssue
 from security_monkey.exceptions import S3PermissionsIssue
 from security_monkey.exceptions import S3ACLReturnedNoneDisplayName
 from security_monkey import app
-
-from boto.s3.connection import OrdinaryCallingFormat
-import boto
-import json
 
 
 def get_logging(bhandle):

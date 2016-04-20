@@ -21,6 +21,8 @@ SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:securitymonkeypassword@localhos
 
 SQLALCHEMY_POOL_SIZE = 50
 SQLALCHEMY_MAX_OVERFLOW = 15
+SQLALCHEMY_POOL_RECYCLE = 900
+
 ENVIRONMENT = 'ec2'
 USE_ROUTE53 = False
 FQDN = 'ec2-XX-XXX-XXX-XXX.compute-1.amazonaws.com'
