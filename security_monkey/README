@@ -1,0 +1,17 @@
+# Dev Notes
+
+Security Monkey is a two part app;
+the Flask app serves a JSON REST API,
+the front end is written in Dart.
+
+## Structure
+
+Security monkey has been developed with a very flat structure,
+Models are in datastore.py, Views in the views folder,
+Routes live in __init__.py
+
+alerter.py, auditors, reporter.py, scheduler.py and watcher.py make up the scheduler that monitors AWS.
+
+duo_web contains the code provided by duo to do MFA
+
+auth contains everything related to RBAC, as well as login views for MFA
